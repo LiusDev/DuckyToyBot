@@ -12,7 +12,7 @@ import jsclub.codefest.sdk.util.GameUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Test_Bot {
     final static String SERVER_URL = "https://codefest.jsclub.me/";
 
     public static void main(String[] args) {
