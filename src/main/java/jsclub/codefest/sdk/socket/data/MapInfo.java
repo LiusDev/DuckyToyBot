@@ -5,7 +5,9 @@ import com.google.gson.Gson;
 import jsclub.codefest.sdk.constant.MapEncode;
 import jsclub.codefest.sdk.model.Hero;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MapInfo {
     public String myId;
@@ -31,6 +33,14 @@ public class MapInfo {
      */
     public List<Viruses> getVirus() {
         return viruses;
+    }
+
+    public List<Position> getVirusesPosition() {
+        List <Position> output = new ArrayList<>();
+        for (Viruses viruses : this.getVirus()) {
+            output.add(viruses.position);
+        }
+        return output;
     }
 
     /**
@@ -165,6 +175,14 @@ public class MapInfo {
             }
         }
         return dhumanList;
+    }
+
+    public List<Position> getDhumanPosition() {
+        List <Position> output = new ArrayList<>();
+        for (Human Dhuman : this.getDhuman()) {
+            output.add(Dhuman.position);
+        }
+        return output;
     }
 
     /**

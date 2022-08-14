@@ -68,7 +68,6 @@ public class AStarSearch extends BaseAlgorithm {
                         && (distanceBetweenTwoPoints(n, start) < distanceBetweenTwoPoints(now, start))) {
                     now = n;
                 }
-
             }
             // Remove the current Node from the open list and add it to the closed list
             openList.remove(now);

@@ -12,7 +12,7 @@ import java.util.Random;
 public class RandomPlayer {
     final static String SERVER_URL = "https://codefest.jsclub.me/";
     final static String PLAYER_ID = "player2-xxx";
-    final static String GAME_ID = "da2d6f34-47a4-4470-9503-b134038e2247";
+    final static String GAME_ID = "59acefd6-677b-4b18-a24e-2edcfe351a33";
 
     public static String getRandomPath(int length) {
         Random rand = new Random();
