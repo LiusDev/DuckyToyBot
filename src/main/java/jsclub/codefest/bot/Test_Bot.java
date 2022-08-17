@@ -15,18 +15,19 @@ import java.util.Stack;
 
 public class Test_Bot {
     final static String SERVER_URL = "https://codefest.jsclub.me/";
+    private static final String GAME_ID = "dcf1c911-08d6-4190-9ba8-767ea8dc7123";
 
     public static void main(String[] args) {
         // Creating a new Hero object with name `player1-xxx` and game id
         // `GameConfig.GAME_ID`.
-        Hero player1 = new Hero("player1-xxx", GameConfig.GAME_ID);
+        Hero player1 = new Hero("player1-xxx", GAME_ID);
 
         Listener onTickTackListener = objects -> {
             GameInfo gameInfo = GameUtil.getGameInfo(objects);
             MapInfo mapInfo = gameInfo.getMapInfo();
-
+            String path = MyAlgorithm.getEscapePath(mapInfo, player1);
             // Sending the path to the server.
-            player1.move(MyAlgorithm.getTheShortestSpoilsPath(mapInfo, player1));
+            player1.move(path);
         };
 
         // This is the code that connects the player to the server.
