@@ -10,6 +10,7 @@ import java.util.*;
 public class MyAlgorithm {
 
 //    boolean mIsCollectGift;
+    boolean isDanger;
 
     private String getPathToEnemy(MapInfo mapInfo, Hero player) {
         Position currentPosition = mapInfo.getCurrentPosition(player);
@@ -57,23 +58,19 @@ public class MyAlgorithm {
         return listSpoils;
     }
 
-    private static String getTheShortestPath(MapInfo mapInfo, Hero player, List<Position> listTarget) {
+    private static String getTheShortestPath(MapInfo mapInfo, Hero player, List<Position> restrictPosition, List<Position> listTargetPosition) {
         Position currentPosition = mapInfo.getCurrentPosition(player);
-        List<Position> restrictPosition = new ArrayList<>();
-        restrictPosition.addAll(mapInfo.getWalls());
-        restrictPosition.addAll(mapInfo.getBalk());
-        restrictPosition.addAll(mapInfo.getTeleportGate());
 
-        if (!listTarget.isEmpty()) {
-            int minPath = BaseAlgorithm.manhattanDistance(currentPosition, listTarget.get(0));
+        if (!listTargetPosition.isEmpty()) {
+            int minPath = BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(0));
             int minPathIndex = 0;
-            for (int i = 0; i < listTarget.size(); i++) {
-                if (BaseAlgorithm.manhattanDistance(currentPosition, listTarget.get(i)) < minPath) {
-                    minPath = BaseAlgorithm.manhattanDistance(currentPosition, listTarget.get(i));
+            for (int i = 0; i < listTargetPosition.size(); i++) {
+                if (BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(i)) < minPath) {
+                    minPath = BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(i));
                     minPathIndex = i;
                 }
             }
-            return AStarSearch.aStarSearch(mapInfo.mapMatrix, restrictPosition, currentPosition, listTarget.get(minPathIndex));
+            return AStarSearch.aStarSearch(mapInfo.mapMatrix, restrictPosition, currentPosition, listTargetPosition.get(minPathIndex));
         }
         return Dir.INVALID;
     }
@@ -118,18 +115,32 @@ public class MyAlgorithm {
 //    }
 
     public static String getEscapePath(MapInfo mapInfo, Hero player) {
+        Position currentPosition = mapInfo.getCurrentPosition(player);
+        List<Position> restrictPosition = new ArrayList<>();
+        restrictPosition.addAll(mapInfo.getWalls());
+        restrictPosition.addAll(mapInfo.getBalk());
+        restrictPosition.addAll(mapInfo.getTeleportGate());
 
-        List<Position> safePosition = new ArrayList<>();
-        safePosition.addAll(mapInfo.getBlank());
+        List<Position> safePositionList = new ArrayList<>();
+        safePositionList.addAll(mapInfo.getBlank());
 
-        List<Position> bombsPosition = mapInfo.getBombList();
-        System.out.println(bombsPosition);
+        List<Position> bombsPosition = new ArrayList<>();
+        bombsPosition.addAll(mapInfo.getBombList());
 
-        String sortestSafePosition;
+        boolean isDanger = false;
         if (!bombsPosition.isEmpty()) {
-            safePosition.removeAll(mapInfo.getBombList());
-            sortestSafePosition = getTheShortestPath(mapInfo, player, safePosition);
-            return sortestSafePosition;
+            for (int i = 0; i < bombsPosition.size(); i++) {
+                if (bombsPosition.get(i).getCol() == currentPosition.getCol() && bombsPosition.get(i).getRow() == currentPosition.getRow()) {
+                    System.out.println("Danger!");
+                    isDanger = true;
+                    break;
+                }
+            }
+            if (!safePositionList.isEmpty() && isDanger) {
+                safePositionList.removeAll(mapInfo.getBombList());
+                safePositionList.remove(currentPosition);
+                return getTheShortestPath(mapInfo, player, restrictPosition, safePositionList);
+            }
         }
         return Dir.INVALID;
     }

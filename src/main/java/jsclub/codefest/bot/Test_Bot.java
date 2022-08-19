@@ -15,7 +15,7 @@ import java.util.Stack;
 
 public class Test_Bot {
     final static String SERVER_URL = "https://codefest.jsclub.me/";
-    private static final String GAME_ID = "dcf1c911-08d6-4190-9ba8-767ea8dc7123";
+    private static final String GAME_ID = "ff3a6695-c6c0-4e4e-abe2-d51bce2837e7";
 
     public static void main(String[] args) {
         // Creating a new Hero object with name `player1-xxx` and game id
