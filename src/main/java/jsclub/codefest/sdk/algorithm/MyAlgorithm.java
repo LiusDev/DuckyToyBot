@@ -66,6 +66,8 @@ public class MyAlgorithm {
             int minPathIndex = 0;
             for (int i = 0; i < listTargetPosition.size(); i++) {
                 if (BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(i)) < minPath) {
+                    listTargetPosition.remove(currentPosition);
+                    System.out.println(listTargetPosition.get(i).getCol() + "-" + listTargetPosition.get(i).getRow() + " " + BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(i)) + " PATH | " + currentPosition.getCol() + "-" + currentPosition.getRow() + " PLAYER POSITION");
                     minPath = BaseAlgorithm.manhattanDistance(currentPosition, listTargetPosition.get(i));
                     minPathIndex = i;
                 }
@@ -136,9 +138,10 @@ public class MyAlgorithm {
                     break;
                 }
             }
-            if (!safePositionList.isEmpty() && isDanger) {
+//            if (!safePositionList.isEmpty() && isDanger) {
+            if (isDanger) {
                 safePositionList.removeAll(mapInfo.getBombList());
-                safePositionList.remove(currentPosition);
+//                safePositionList.remove(currentPosition);
                 return getTheShortestPath(mapInfo, player, restrictPosition, safePositionList);
             }
         }
