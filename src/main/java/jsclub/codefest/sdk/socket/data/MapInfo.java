@@ -26,6 +26,8 @@ public class MapInfo {
     public List<Position> teleportGate = new ArrayList<>();
     public List<Position> quarantinePlace = new ArrayList<>();
 
+    private static final int NUM_OF_STEPS = 2;
+
     /**
      * This function returns a list of viruses
      * 
@@ -37,8 +39,11 @@ public class MapInfo {
 
     public List<Position> getVirusesPosition() {
         List <Position> output = new ArrayList<>();
+        int direction;
         for (Viruses viruses : this.getVirus()) {
-            output.add(viruses.position);
+            direction = viruses.direction;
+//            output.add(viruses.position);
+            output.add(viruses.position.nextPosition(direction, NUM_OF_STEPS));
         }
         return output;
     }
@@ -160,6 +165,17 @@ public class MapInfo {
         return human;
     }
 
+    public List<Position> getHumanPosition() {
+        List <Position> output = new ArrayList<>();
+        int direction;
+        for (Human human : this.getHuman()) {
+            direction = human.direction;
+//            output.add(human.position);
+            output.add(human.position.nextPosition(direction, NUM_OF_STEPS));
+        }
+        return output;
+    }
+
     /**
      * It returns a list of all the infected humans in the current human list
      * 
@@ -179,8 +195,11 @@ public class MapInfo {
 
     public List<Position> getDhumanPosition() {
         List <Position> output = new ArrayList<>();
-        for (Human Dhuman : this.getDhuman()) {
-            output.add(Dhuman.position);
+        int direction;
+        for (Human dhuman : this.getDhuman()) {
+            direction = dhuman.direction;
+//            output.add(dhuman.position);
+            output.add(dhuman.position.nextPosition(direction, NUM_OF_STEPS));
         }
         return output;
     }

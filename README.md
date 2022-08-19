@@ -1,4 +1,4 @@
-<p align="center"><img width="15%" src="static/img/codefest_avatar.jpg" alt="icon"></p>
+<p align="center"><img width="15%" src=".static/img/codefest_avatar.jpg" alt="icon"></p>
 <h2 align="center">JSClub Codefest SDK</h2>
 
 ## Introduction
