@@ -5,9 +5,7 @@ import com.google.gson.Gson;
 import jsclub.codefest.sdk.constant.MapEncode;
 import jsclub.codefest.sdk.model.Hero;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MapInfo {
     public String myId;
@@ -39,11 +37,11 @@ public class MapInfo {
 
     public List<Position> getVirusesPosition() {
         List <Position> output = new ArrayList<>();
-        int direction;
         for (Viruses viruses : this.getVirus()) {
-            direction = viruses.direction;
-//            output.add(viruses.position);
-            output.add(viruses.position.nextPosition(direction, NUM_OF_STEPS));
+            output.add(viruses.position);
+            for (int i =1; i<=4; i++) {
+                output.add(viruses.position.nextPosition(i, NUM_OF_STEPS));
+            }
         }
         return output;
     }
@@ -118,6 +116,19 @@ public class MapInfo {
             }
         }
         return position;
+    }
+
+    public int getPlayerPill(Hero hero) {
+        int playerPill = 0;
+        if (hero != null) {
+            for (Player player : players) {
+                if (hero.getPlayerID().startsWith(player.id)) {
+                    playerPill = player.pill;
+                    break;
+                }
+            }
+        }
+        return playerPill;
     }
 
     /**
@@ -200,6 +211,29 @@ public class MapInfo {
             direction = dhuman.direction;
 //            output.add(dhuman.position);
             output.add(dhuman.position.nextPosition(direction, NUM_OF_STEPS));
+        }
+        return output;
+    }
+
+    public List<Human> getNhuman() {
+        List<Human> nhumanList = new ArrayList<>();
+        if (human != null) {
+            for (Human nhuman : human) {
+                if (!nhuman.infected) {
+                    nhumanList.add(nhuman);
+                }
+            }
+        }
+        return nhumanList;
+    }
+
+    public List<Position> getNhumanPosition() {
+        List <Position> output = new ArrayList<>();
+        int direction;
+        for (Human nhuman : this.getNhuman()) {
+            direction = nhuman.direction;
+            output.add(nhuman.position);
+            output.add(nhuman.position.nextPosition(direction, NUM_OF_STEPS));
         }
         return output;
     }
