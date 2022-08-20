@@ -1,6 +1,5 @@
-<p align="center"><img width="15%" src=".static/img/duckytoy_bot.jpg" alt="icon"></p>
-<h2 align="center">DUCKYTOY BOT</h2>
-<h3 align="center">(CHAMPION BOT)</h3>
+<p align="center"><img width="15%" src="https://imgur.com/LCPwwop.jpg" alt="icon"></p>
+<h2 align="center">DUCKYTOY BOT (CHAMPION BOT)</h2>
 
 ## Introduction
 
