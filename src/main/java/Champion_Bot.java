@@ -8,8 +8,8 @@ import jsclub.codefest.sdk.util.GameUtil;
 
 public class Champion_Bot {
     final static String SERVER_URL = "https://jsclub.me/";
-    final static String GAME_ID = "57837cfa-7ce5-4f51-afb9-188485e1a2cd";
-    final static String PLAYER_ID = "player1-xxx";
+    final static String GAME_ID = "0c541145-3327-46ff-83c1-c8a62a607af8";
+    final static String PLAYER_ID = "player2-xxx";
 
     public static void main(String[] args) {
         Hero player = new Hero(PLAYER_ID, GAME_ID);

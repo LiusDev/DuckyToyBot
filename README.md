@@ -5,4 +5,6 @@
 
 💻 Không dài dòng, đây là src code của nhà vô địch 😎
 
-💻 Bot: src > java > Champion_Bot
+🤖 Bot: src > java > Champion_Bot
+
+🏷️ PlayerID: `d225a7a4-95ea-4f66-ae31-c50f29ba57a0`
